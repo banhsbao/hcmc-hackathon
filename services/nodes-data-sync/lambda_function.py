@@ -33,6 +33,7 @@ def update_node(node):
     node_id = node.get("node_id")
     ph = node.get("ph")
     tds = node.get("tds")
+    status = node.get("status")
 
     if not node_id or ph is None or tds is None:
         logger.warning(f"Invalid input for node: {node}")
@@ -50,8 +51,14 @@ def update_node(node):
         logger.info(f"Updating node with ID: {node_id}")
         table.update_item(
             Key={"nodeId": node_id},
-            UpdateExpression="set ph = :p, tds = :t, update_time = :u",
-            ExpressionAttributeValues={":p": ph, ":t": tds, ":u": update_time},
+            UpdateExpression="set ph = :p, tds = :t, #s = :status, update_time = :u",
+            ExpressionAttributeNames={"#s": "status"},
+            ExpressionAttributeValues={
+                ":p": ph,
+                ":t": tds,
+                ":status": status,
+                ":u": update_time,
+            },
             ReturnValues="UPDATED_NEW",
         )
         logger.info(f"Node with ID: {node_id} successfully updated")
