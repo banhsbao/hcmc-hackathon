@@ -1,0 +1,4 @@
+boto3
+urllib3<2
+botocore
+python-dotenv
