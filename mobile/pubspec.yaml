@@ -1,0 +1,157 @@
+name: angelhack_hcm
+version: 1.0.0+1
+publish_to: none
+description: Water Pollution Protection Project
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Core
+  get: 4.6.6
+
+  # Logger
+  talker: ^4.3.2
+  talker_dio_logger: ^4.3.2
+  talker_flutter: ^4.3.2
+
+  # Localization
+  intl: ^0.19.0
+  flutter_localizations:
+    sdk: flutter
+
+  # Utility
+  cached_network_image: ^3.3.1
+  dart_jsonwebtoken: ^2.14.0
+  flex_color_scheme: ^7.3.1
+  flutter_form_builder: ^9.3.0
+  flutter_screenutil: ^5.9.3
+  flutter_svg: ^2.0.10+1
+  form_builder_validators: ^10.0.1
+  internet_connection_checker_plus: ^2.5.0
+  path_drawing: ^1.0.1
+  permission_handler: ^11.3.1
+  url_launcher: ^6.3.0
+
+  # Amplify
+  amplify_api: ^2.2.0
+  amplify_auth_cognito: ^2.2.0
+  amplify_authenticator: ^2.1.0
+  amplify_flutter: ^2.2.0
+
+  # UI
+  animated_bottom_navigation_bar: ^1.3.3
+  another_flutter_splash_screen: ^1.2.1
+  badges: ^3.1.2
+  fluentui_system_icons: ^1.1.246
+  flutter_staggered_grid_view: ^0.7.0
+  gap: ^3.0.1
+  google_fonts: ^6.2.1
+  heroicons: ^0.10.0
+  infinite_scroll_pagination: ^4.0.0
+  jiffy: ^6.3.1
+  loading_animation_widget: ^1.2.1
+  lottie: ^3.1.2
+  ndialog: ^4.3.1
+  pinput: ^5.0.0
+  shimmer: ^3.0.0
+
+  # Map
+  flutter_map: ^7.0.1
+  flutter_map_animations: ^0.7.0
+  flutter_map_cancellable_tile_provider: ^3.0.0
+  flutter_map_location_marker: ^9.0.0
+  geocoding: ^3.0.0
+  geolocator: ^12.0.0
+  latlong2: ^0.9.1
+
+  # Chat
+  file_picker: ^8.0.5
+  flutter_chat_types: ^3.6.2
+  flutter_chat_ui: ^1.6.14
+  image_picker: ^1.1.2
+  mime: ^1.0.5
+  open_filex: ^4.4.0
+  path_provider: ^2.1.3
+  uuid: ^4.4.0
+  http: ^1.2.1
+
+  # Firebase
+  firebase_core: ^3.1.1
+  firebase_core_platform_interface: ^5.1.0
+  firebase_messaging: ^15.0.2
+  flutter_local_notifications: ^17.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  build_runner: ^2.4.11
+  envied_generator: ^0.5.4+1
+  flutter_gen_runner: ^5.6.0
+  flutter_lints: 4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/animations/
+    - assets/images/
+    - assets/svgs/
+
+flutter_intl:
+  enabled: true
+  class_name: I10n
+  arb_dir: lib/app/shared/localization/l10n
+  output_dir: lib/app/shared/localization/generated
+
+flutter_gen:
+  output: lib/app/shared/constants/resources/
+  integrations:
+    flutter_svg: true
+    lottie: true
+
+scripts:
+  build:
+    android:
+      apk: flutter build apk -t lib/main.dart
+      appbundle: flutter build appbundle -t lib/main.dart
+
+  gen:
+    clean_build: dart run build_runner clean && dart run build_runner build
+      --delete-conflicting-outputs
+    clean_watch: dart run build_runner clean && dart run build_runner watch
+      --delete-conflicting-outputs
+    build: dart run build_runner build --delete-conflicting-outputs
+    watch: dart run build_runner watch --delete-conflicting-outputs
+
+  clear:
+    $script: flutter clean
+
+  reset:
+    android:
+      $script:
+        $windows: cd android && gradlew clean && cd ..
+
+    flutter:
+      $before: rps clear
+      $script: flutter pub get
+
+  scrcpy:
+    win:
+      $script: scrcpy --stay-awake --always-on-top
+    record:
+      $script: rps win --record=recordedVideo.mkv
+
+  # shortcuts
+  baab: rps build android appbundle
+  bapk: rps build android apk
+  gb: rps gen build
+  gcb: rps gen clean_build
+  gcw: rps gen clean_watch
+  gw: rps gen watch
+  rsa: rps reset android
+  rsf: rps reset flutter
+  win: rps scrcpy win

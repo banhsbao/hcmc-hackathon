@@ -1,0 +1,24 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-angelhackhcm-dev-5bb00-authRole",
+      "UnauthRoleArn": "arn:aws:iam::282679431619:role/amplify-angelhackhcm-dev-5bb00-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::282679431619:role/amplify-angelhackhcm-dev-5bb00-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-angelhackhcm-dev-5bb00-deployment",
+      "UnauthRoleName": "amplify-angelhackhcm-dev-5bb00-unauthRole",
+      "StackName": "amplify-angelhackhcm-dev-5bb00",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:282679431619:stack/amplify-angelhackhcm-dev-5bb00/8c331380-3617-11ef-9ee6-067e31400af5",
+      "AmplifyAppId": "d2g9gb01guymj1",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-angelhackhcm-dev-5bb00-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    },
+    "categories": {
+      "auth": {
+        "angelhackhcm4682338a": {}
+      },
+      "function": {
+        "angelhackhcm710572b8": {}
+      }
+    }
+  }
+}

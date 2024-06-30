@@ -1,0 +1,60 @@
+workflows:
+  my-workflow:
+    name: Angelhack HCM CI/CD
+    labels:
+      - QA
+    instance_type: mac_mini_m1
+    max_build_duration: 60
+    environment:
+      groups:
+        - group_name
+      vars:
+        PUBLIC_ENV_VAR: 'value here'
+      flutter: stable
+      xcode: latest
+    cache:
+      cache_paths:
+        - ~/.pub-cache
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: '*'
+          include: true
+          source: true
+      cancel_previous_builds: false
+    scripts:
+      - |
+        #!/bin/bash
+
+        # Flutter build commands for Android
+        flutter clean
+        flutter pub get
+        flutter build apk --release
+
+        # Move the generated APK to the desired location
+        mv build/app/outputs/flutter-apk/app-release.apk build/outputs/bundle/app-release.apk
+
+      - |
+        #!/bin/bash
+
+        # Flutter build commands for iOS
+        flutter clean
+        flutter pub get
+        flutter build ios --release --no-codesign
+
+        # Move the generated artifacts to the desired location
+        mv build/ios/Runner.app build/outputs/bundle/Runner.app
+
+        # Archive the app
+        xcodebuild archive -workspace Runner.xcworkspace -scheme Runner -archivePath build/ios/Runner.xcarchive
+
+        # Export the archive as an .ipa file
+        xcodebuild -exportArchive -archivePath build/ios/Runner.xcarchive -exportPath build/ios/Runner.ipa -exportOptionsPlist exportOptions.plist
+
+        # Move the .ipa file to the desired location
+        mv build/ios/Runner.ipa build/outputs/bundle/Runner.ipa
+
+    artifacts:
+      - build/**/outputs/bundle/**/*.ipa
+      - build/**/outputs/bundle/**/*.apk
