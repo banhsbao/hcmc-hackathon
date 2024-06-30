@@ -54,6 +54,14 @@ The EcoPerson project addresses serious environmental issues in Hồ Chí Minh C
 - **Comprehensive Data Handling**: Efficient data ingestion, processing, and storage using AWS IoT, Kinesis, S3, and DynamoDB.
 - **Environmental Impact**: Raises awareness and encourages community actions to protect water sources.
 
+### Find and alert users in polluted area
+![Architecture](images/geohash01.png)
+![Architecture](images/geohash02.png)
+![Architecture](images/geohash03.png)
+![Architecture](images/geohash04.png)
+![Architecture](images/geohash05.png)
+![Architecture](images/geohash06.png)
+
 ## Getting Started
 
 1. **Deploy IoT Devices**: Install and configure IoT devices in the target rivers to start measuring water quality.
