@@ -1,24 +1,28 @@
 import 'package:intl/intl.dart';
 
-import 'package:angelhack_hcm/app/shared/utils/ui_utils.dart';
+String getDifferentTime(String timeDiff) {
+  final dateTime = DateTime.parse(timeDiff);
+  final now = DateTime.now();
+  final difference = dateTime.isAfter(now)
+      ? dateTime.difference(now)
+      : now.difference(dateTime);
 
-String getDifferentTime(int timeDiff) {
-  final seconds = timeDiff ~/ 1000;
-  final minutes = seconds ~/ 60;
-  final hours = minutes ~/ 60;
-  final days = hours ~/ 24;
+  final seconds = difference.inSeconds;
+  final minutes = difference.inMinutes;
+  final hours = difference.inHours;
+  final days = difference.inDays;
   final weeks = days ~/ 7;
 
   if (seconds < 60) {
-    return '$seconds ${localeLang.secondsAgo}';
+    return '$seconds seconds ago';
   } else if (minutes < 60) {
-    return '$minutes ${localeLang.minutesAgo}';
+    return '$minutes minutes ago';
   } else if (hours < 24) {
-    return '$hours ${localeLang.hoursAgo}';
+    return '$hours hours ago';
   } else if (days < 7) {
-    return '$days ${localeLang.daysAgo}';
+    return '$days days ago';
   } else {
-    return '$weeks ${localeLang.weeksAgo}';
+    return '$weeks weeks ago';
   }
 }
 

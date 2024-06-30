@@ -11,6 +11,7 @@ abstract class Routes {
   static const REGISTER = _Paths.REGISTER;
   static const VERIFICATION = _Paths.VERIFICATION;
   static const MAP_GPS = _Paths.MAP_GPS;
+  static const MAP_DETAIL = _Paths.MAP_DETAIL;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const REGISTER = '/register';
   static const VERIFICATION = '/verification';
   static const MAP_GPS = '/map-gps';
+  static const MAP_DETAIL = '/map-detail';
 }

@@ -1,4 +1,3 @@
-import 'package:angelhack_hcm/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -7,8 +6,11 @@ import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
 
 import 'package:angelhack_hcm/app/data/di.dart';
+import 'package:angelhack_hcm/app/modules/home/map_gps/controllers/map_gps_controller.dart';
 import 'package:angelhack_hcm/app/modules/home/map_gps/views/map_gps_view.dart';
+import 'package:angelhack_hcm/app/modules/home/notification/controllers/notification_controller.dart';
 import 'package:angelhack_hcm/app/modules/home/notification/views/notification_view.dart';
+import 'package:angelhack_hcm/app/routes/app_pages.dart';
 import 'package:angelhack_hcm/app/shared/constants/enums/systems.dart';
 import 'package:angelhack_hcm/app/shared/utils/ui_utils.dart';
 import 'package:angelhack_hcm/app/shared/utils/utils.dart';
@@ -89,11 +91,37 @@ class HomepageController extends BaseController
   }
 
   Future<void> getInAppSystem() async {
-    pageController = PageController();
+    pageController = PageController(initialPage: currentTabIndex.value);
   }
 
   Future<void> onNavigateChat() async {
     await Get.toNamed(Routes.CHAT);
+  }
+
+  void onCenterMap() {
+    final mapGpsController = Get.find<MapGpsController>();
+    mapGpsController.animatedMapController?.animateTo(
+      dest: mapGpsController.currentLocation,
+      rotation: 0,
+      zoom: 16,
+    );
+  }
+
+  void onTabChange(int index) {
+    currentTabIndex.value = index;
+
+    if (index == 0) {
+      final mapGpsController = Get.find<MapGpsController>();
+      mapGpsController.startNodeUpdates();
+    }
+
+    if (index == 1) {
+      hasNotification.value = false;
+      final notificationController = Get.find<NotificationController>();
+      notificationController.pagingController.addPageRequestListener(
+        (pageKey) => notificationController.fetchData(pageKey),
+      );
+    }
   }
 }
 

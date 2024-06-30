@@ -1,3 +1,5 @@
+import 'package:angelhack_hcm/app/shared/utils/ui_utils.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
@@ -73,6 +75,16 @@ class HomepageView extends BaseSilverView<HomepageController> {
                   child: Text(controller.tabs[index].title),
                 ),
               ],
+            ),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: FloatingActionButton(
+            onPressed: () async => controller.onCenterMap(),
+            tooltip: localeLang.currentLocation,
+            child: Icon(
+              FluentIcons.my_location_20_regular,
+              size: 24.sp,
             ),
           ),
           body: PageView(

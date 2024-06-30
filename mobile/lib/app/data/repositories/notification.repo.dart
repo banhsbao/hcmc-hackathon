@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 
-const jsonData = '''
+import 'package:angelhack_hcm/app/data/models/notification.response.dart';
+
+final jsonData = '''
     [
       {
           "notifyId": {
@@ -21,7 +23,7 @@ const jsonData = '''
               "S": "Hi bao, the water near you is currently polluted. Please be careful!"
           },
           "timestamp": {
-              "S": "2024-06-29T19:40:31.676372"
+              "S": "${DateTime.now().toIso8601String()}"
           }
       },
       {
@@ -41,7 +43,7 @@ const jsonData = '''
               "S": "Hi bao, the water near you is currently polluted. Please be careful!"
           },
           "timestamp": {
-              "S": "2024-06-29T19:37:13.823781"
+              "S": "${DateTime.now().add(const Duration(seconds: 32)).toIso8601String()}"
           }
       },
       {
@@ -548,8 +550,11 @@ const jsonData = '''
     ''';
 
 class NotificationRepository extends GetxService {
-  Future<List<dynamic>> getUserNotifications() async {
+  Future<List<NotificationResponse>> getUserNotifications() async {
     await Future.delayed(const Duration(seconds: 2));
-    return jsonDecode(jsonData);
+    final data = jsonDecode(jsonData) as List<dynamic>;
+    return data.map((e) => NotificationResponse.fromJson(e)).toList();
   }
+
+  void onRefresh() {}
 }

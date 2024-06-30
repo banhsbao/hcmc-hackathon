@@ -13,10 +13,12 @@ import '../modules/home/chat/bindings/chat_binding.dart';
 import '../modules/home/chat/views/chat_view.dart';
 import '../modules/home/homepage/bindings/homepage_binding.dart';
 import '../modules/home/homepage/views/homepage_view.dart';
-import '../modules/home/notification/bindings/notification_binding.dart';
-import '../modules/home/notification/views/notification_view.dart';
 import '../modules/home/map_gps/bindings/map_gps_binding.dart';
 import '../modules/home/map_gps/views/map_gps_view.dart';
+import '../modules/home/notification/bindings/notification_binding.dart';
+import '../modules/home/notification/views/notification_view.dart';
+import '../modules/home/map_detail/bindings/map_detail_binding.dart';
+import '../modules/home/map_detail/views/map_detail_view.dart';
 
 part 'app_routes.dart';
 
@@ -77,6 +79,11 @@ class AppPages {
       binding: ChatBinding(),
       transition: Transition.fade,
       transitionDuration: $r.times.fast,
+    ),
+    GetPage(
+      name: _Paths.MAP_DETAIL,
+      page: () => const MapDetailView(),
+      binding: MapDetailBinding(),
     ),
   ];
 }

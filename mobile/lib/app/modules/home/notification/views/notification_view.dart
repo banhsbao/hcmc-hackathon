@@ -71,7 +71,7 @@ class NotificationView extends GetView<NotificationController> {
                           FluentIcons.text_grammar_checkmark_20_regular,
                           color: $r.theme.white,
                         ),
-                        onPressed: () => controller.markAllAsRead(),
+                        onPressed: () => {},
                       ),
                   ],
                 ),
@@ -86,7 +86,7 @@ class NotificationView extends GetView<NotificationController> {
                   flex: 7,
                   child: Container(
                     width: width,
-                    padding: const EdgeInsets.fromLTRB(24, 32, 24, 24),
+                    padding: const EdgeInsets.fromLTRB(24, 32, 24, 0),
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.surface,
                       borderRadius: const BorderRadius.only(
@@ -127,19 +127,25 @@ class NotificationView extends GetView<NotificationController> {
                             itemBuilder: (_, item, index) => NotificationItem(
                               key: ValueKey(index),
                               pgCtrl: controller.pagingController,
-                              index: controller.pagingController.itemList
-                                  ?.elementAt(index)
-                                  .notifyId,
+                              index: int.tryParse(
+                                controller.pagingController.itemList
+                                    ?.elementAt(index)
+                                    .notifyId
+                                    .s,
+                              ),
                               title: controller.pagingController.itemList
                                   ?.elementAt(index)
-                                  .title,
+                                  .title
+                                  .s,
                               content: controller.pagingController.itemList
                                   ?.elementAt(index)
-                                  .body,
+                                  .body
+                                  .s,
                               timeDifferent: controller
                                   .pagingController.itemList
                                   ?.elementAt(index)
-                                  .timestamp,
+                                  .timestamp
+                                  .s,
                             ),
                           ),
                         ),

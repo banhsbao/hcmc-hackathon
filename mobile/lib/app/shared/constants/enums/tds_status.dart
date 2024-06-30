@@ -9,7 +9,8 @@ enum TDSStatus {
 
 extension TDSStatusHelper on TDSStatus {
   static IconData getIcon(String? value) {
-    final status = TDSStatus.values.firstWhere((e) =>  e.name.toLowerCase() == value?.toLowerCase());
+    final status = TDSStatus.values
+        .firstWhere((e) => e.name.toLowerCase() == value?.toLowerCase());
     switch (status) {
       case TDSStatus.NORMAL:
         return FluentIcons.emoji_24_regular;
@@ -37,18 +38,31 @@ extension TDSStatusHelper on TDSStatus {
     }
   }
 
-  static Color getColor(String? value) {
-    final status = TDSStatus.values
-        .firstWhere((e) => e.name.toLowerCase() == value?.toLowerCase());
-    switch (status) {
-      case TDSStatus.NORMAL:
-        return Colors.green;
-      case TDSStatus.POLLUTED:
-        return Colors.red;
-      case TDSStatus.UNKNOWN:
-        return Colors.grey;
-      default:
-        return Colors.grey;
+  // static Color getColor(String? value) {
+  //   final status = TDSStatus.values
+  //       .firstWhere((e) => e.name.toLowerCase() == value?.toLowerCase());
+  //   switch (status) {
+  //     case TDSStatus.NORMAL:
+  //       return Colors.green;
+  //     case TDSStatus.POLLUTED:
+  //       return Colors.red;
+  //     case TDSStatus.UNKNOWN:
+  //       return Colors.grey;
+  //     default:
+  //       return Colors.grey;
+  //   }
+  // }
+
+  static Color getColorPH(double? value) {
+    if (value == null) {
+      return Colors.grey;
+    }
+    if (value < 6.5) {
+      return Colors.red;
+    } else if (value > 8.5) {
+      return Colors.red;
+    } else {
+      return Colors.green;
     }
   }
 }

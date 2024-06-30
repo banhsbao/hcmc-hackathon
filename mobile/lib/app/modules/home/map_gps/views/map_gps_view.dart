@@ -7,7 +7,6 @@ import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:flutter_map_cancellable_tile_provider/flutter_map_cancellable_tile_provider.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 
 import 'package:angelhack_hcm/app/shared/constants/resources/assets.gen.dart';
 import 'package:angelhack_hcm/app/shared/utils/ui_utils.dart';
@@ -16,7 +15,6 @@ import 'package:angelhack_hcm/app/shared/widgets/utils/custom_appbar.dart';
 import 'package:angelhack_hcm/app/shared/widgets/utils/keyboard_dismisser.dart';
 import 'package:angelhack_hcm/app/shared/widgets/utils/svg_asset.dart';
 
-import '../components/map_gps_component.dart';
 import '../controllers/map_gps_controller.dart';
 
 class MapGpsView extends BaseSilverView<MapGpsController> {
@@ -65,7 +63,7 @@ class MapGpsView extends BaseSilverView<MapGpsController> {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 8.h),
                 child: CustomAppBar(
-                  title: localeLang.map,
+                  title: 'EcoPerson',
                   actions: [
                     CupertinoButton(
                       padding: EdgeInsets.zero,
@@ -135,25 +133,6 @@ class MapGpsView extends BaseSilverView<MapGpsController> {
             ],
           ),
         ),
-      ),
-      floatingActionButton: SeparatedColumn(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        separator: const Gap(8),
-        children: [
-          FloatingActionButton(
-            onPressed: () async => controller.animatedMapController?.animateTo(
-              dest: controller.currentLocation,
-              rotation: 0,
-              zoom: 16,
-            ),
-            tooltip: localeLang.currentLocation,
-            child: Icon(
-              FluentIcons.my_location_20_regular,
-              size: 24.sp,
-            ),
-          ),
-        ],
       ),
     );
   }

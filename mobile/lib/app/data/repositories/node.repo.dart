@@ -87,7 +87,7 @@ class NodeRepository extends GetxService {
       // node['gps'] = 'w3gv${List.generate(4, (index) => random.nextInt(10).toString()).join()}';
       // node['latitude'] = (random.nextDouble() * 20 + 10).toStringAsFixed(4);
       // node['longitude'] = (random.nextDouble() * 20 + 100).toStringAsFixed(3);
-      node['ph'] = random.nextInt(15).toString();
+      node['ph'] = (4 + random.nextInt(4)).toString();
       node['tds'] = random.nextInt(1001).toString();
     }
 

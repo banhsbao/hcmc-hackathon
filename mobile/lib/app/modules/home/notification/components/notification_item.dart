@@ -19,7 +19,7 @@ class NotificationItem extends GetView<NotificationController> {
   final String? content;
   final String? title;
   final int? index;
-  final int? timeDifferent;
+  final String? timeDifferent;
   final PagingController<int, dynamic>? pgCtrl;
 
   const NotificationItem({
