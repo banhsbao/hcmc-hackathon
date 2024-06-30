@@ -21,6 +21,7 @@ STREAM_REGION = "ap-southeast-1"
 NodesDataSyncLambdaARN = (
     "arn:aws:lambda:ap-southeast-1:282679431619:function:HCMHackathonNodesDataSync"
 )
+warningLambdaARN = ("arn:aws:lambda:ap-southeast-1:282679431619:function:HCMHackathonUserWarning")
 
 kinesis_client = boto3.client("kinesis", region_name=STREAM_REGION)
 lambda_client = boto3.client("lambda", region_name=STREAM_REGION)
@@ -93,6 +94,16 @@ def invoke_lambda(records):
     except Exception as e:
         logger.error(f"Error invoking Lambda: {e}")
 
+def invoke_warning_lambda(records):
+    try:
+        response = lambda_client.invoke(
+            FunctionName=warningLambdaARN,
+            InvocationType="Event",
+            Payload=json.dumps(records),
+        )
+        logger.info(f"Lambda invoked with response: {response}")
+    except Exception as e:
+        logger.error(f"Error invoking Lambda: {e}")
 
 record_batch = []
 last_invoked_time = time.time()
@@ -136,7 +147,7 @@ def process_record(record):
                 invoke_lambda(filtered_result_df.to_dict(orient="records"))
             polluted_records = result_df[result_df["status"] == "polluted"]
             if not polluted_records.empty:
-                print("Polluted records:", polluted_records)
+                invoke_warning_lambda(polluted_records.to_dict(orient="records"))
 
     except Exception as e:
         logger.error(f"Error processing record: {e}")
