@@ -1,74 +1,66 @@
-# Water Pollution Protection Project
+# EcoPerson Project
 
 ## Team Members
 
-- BanhsBao
-- Duck
-- Dun
-- Mi
+- BanhsBao, Duc, Mi, Dung.
 
-## Project Overview
+## Overview
 
-This project aims to monitor and protect water quality using IoT devices. We have implemented a system that collects, ingests, processes, and analyzes water quality data to detect pollution and provide actionable insights.
+The EcoPerson project addresses serious environmental issues in Hồ Chí Minh City, particularly water pollution caused by illegal discharges into rivers and a lack of environmental awareness among local residents. This initiative employs IoT devices installed in rivers, alongside AWS services, to measure and monitor water quality changes. When unusual changes in water quality are detected, the system automatically sends notifications to app users within a specific radius, helping residents stay informed and take timely actions to reduce pollution. By doing so, EcoPerson contributes to raising environmental awareness and encouraging the community to protect clean water sources.
 
 ## Architecture
 
-![Our Solution Architecure](images/architecture-bg.png)
+![Architecture](images/architecture-bg.png)
 
-### Source
+## Tech Stack
 
-- **IoT/Stream Devices**: These include various sensors like TDS and pH sensors connected to ESP8266 modules. These devices collect telemetry data related to water quality.
-- **Telemetry Data**: The raw data collected by the sensors.
+### IoT Devices
 
-### Collect
+- **pH Sensor**: Measures the acidity or alkalinity of the water.
+- **TDS Sensor**: Measures the total dissolved solids in the water, indicating its purity.
+- **ESP12F**: A Wi-Fi module used to connect the IoT devices to the internet.
+- **IoT Modules**: Devices deployed in rivers to measure water quality parameters.
 
-- **AWS IoT Greengrass**: This service runs on edge devices to collect telemetry data from IoT devices.
-- **AWS IoT**: Manages the communication between the IoT devices and the AWS cloud.
+### AWS Services
 
-### Ingest
+- **AWS IoT Core**: Facilitates secure communication between IoT devices and the cloud.
+- **AWS IoT Rules**: Routes data from IoT devices to appropriate AWS services.
+- **Amazon S3**: Stores data from IoT devices.
+- **AWS Kinesis Data Streams**: Streams data for real-time processing.
+- **AWS Lambda**: Executes code in response to events and automates various functions.
+- **AWS DynamoDB**: A NoSQL database service used for storing user data and application metadata.
+- **AWS API Gateway**: Facilitates the creation and management of APIs for the application.
+- **AWS AppSync**: Provides real-time and offline functionality for the app using GraphQL.
+- **AWS Cognito**: Manages user authentication and access control.
+- **AWS Elastic Container Service (ECS)**: Runs containerized applications in the cloud.
+- **AWS NAT Gateway**: Enables instances in a private subnet to connect to the internet.
+- **Amazon CloudWatch**: Monitors and logs system metrics and application logs.
+- **AWS SNS (Simple Notification Service)**: Sends notifications to users.
+- **AWS SageMaker**: Builds, trains, and deploys machine learning models for data analysis.
+- **AWS Bedrock**: Provides generative AI capabilities for building and scaling AI applications.
 
-- **AWS IoT Core**: Receives and routes the telemetry data from AWS IoT Greengrass.
-- **AWS IoT SiteWise**: Models and analyzes industrial equipment data, including water quality sensors.
+### Other Services
 
-### Transform
+- **Firebase**: Push notification service for sending alerts to mobile devices.
 
-- **Amazon Kinesis Data Streams**: Streams the telemetry data for real-time processing.
-- **Amazon Kinesis Data Analytics**: Performs real-time stream enrichment and anomaly detection on the data.
+## Outstanding Points
 
-### Store
-
-- **Amazon S3**: Stores the telemetry data in a data lake for batch analytics.
-- **Amazon Kinesis Data Firehose**: Delivers real-time streams to Amazon S3 for long-term storage.
-
-### Insights
-
-- **AWS Lambda**: Processes data and triggers actions based on defined rules.
-- **Amazon DynamoDB**: Stores processed data and metadata for quick access.
-- **AWS AppSync**: Synchronizes data with enterprise applications.
-- **Amazon SageMaker**: Performs machine learning inference for advanced analytics.
-- **Amazon OpenSearch Service**: Indexes the data and provides powerful search and analytics capabilities.
-- **Amazon OpenSearch Dashboard**: Visualizes the data and insights for reporting and monitoring.
-
-## Modules Used
-
-- **ESP8266**: A low-cost Wi-Fi microchip used in the IoT devices to send data to the cloud.
-- **TDS Sensor**: Measures the Total Dissolved Solids in the water, indicating its quality.
-- **pH Sensor**: Measures the acidity or alkalinity of the water, an important parameter in water quality.
+- **Real-Time Monitoring**: Continuous monitoring of water quality in rivers using IoT devices.
+- **Automated Alerts**: Immediate notification to residents within an affected radius when pollution levels change.
+- **Scalable Architecture**: Utilizes AWS services to ensure scalability, reliability, and security.
+- **Machine Learning Integration**: Uses AWS SageMaker to develop models that predict and analyze pollution trends.
+- **Generative AI**: Implements AWS Bedrock for advanced AI capabilities and applications.
+- **User Management and Security**: Implements AWS Cognito for secure and seamless user authentication and management.
+- **Comprehensive Data Handling**: Efficient data ingestion, processing, and storage using AWS IoT, Kinesis, S3, and DynamoDB.
+- **Environmental Impact**: Raises awareness and encourages community actions to protect water sources.
 
 ## Getting Started
 
-1. Set up the ESP8266 modules with TDS and pH sensors.
-2. Configure the AWS IoT Greengrass and AWS IoT Core to collect telemetry data from the sensors.
-3. Set up Amazon Kinesis Data Streams and Amazon Kinesis Data Analytics for real-time data processing.
-4. Store data in Amazon S3 using Amazon Kinesis Data Firehose.
-5. Process and analyze the data using AWS Lambda, Amazon SageMaker, and Amazon DynamoDB.
-6. Visualize the insights using Amazon OpenSearch Service and the OpenSearch Dashboard.
-7. Sync the data with enterprise applications using AWS AppSync.
-
-## Conclusion
-
-This project provides a comprehensive solution for monitoring and protecting water quality using IoT technology and AWS services. The architecture ensures real-time data processing, storage, and analysis to detect and respond to water pollution effectively.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+1. **Deploy IoT Devices**: Install and configure IoT devices in the target rivers to start measuring water quality.
+2. **Set Up AWS Services**: Configure the necessary AWS services as outlined in the architecture diagram.
+3. **Connect IoT Devices to AWS IoT Core**: Ensure that the IoT devices can securely communicate with AWS IoT Core.
+4. **Implement Data Processing Pipelines**: Set up data ingestion, processing, and storage using AWS Kinesis, Lambda, and S3.
+5. **Develop and Train Machine Learning Models**: Use AWS SageMaker to build and train models for data analysis and predictions.
+6. **Implement Generative AI**: Utilize AWS Bedrock to enhance AI capabilities within the application.
+7. **Create Notification System**: Configure AWS SNS and Firebase to send real-time alerts to users.
+8. **Deploy User-Facing Application**: Develop and deploy the user application using AWS AppSync, Cognito, and API Gateway.
